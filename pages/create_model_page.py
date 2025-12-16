@@ -1,7 +1,7 @@
 from pages.base_page import BasePage
 import os
 
-class addDiagramPage(BasePage):
+class CreateModelPage(BasePage):
     def __init__(self, page):
         super().__init__(page)
         self.add_button = "//*[text()=' Add a new diagram... ']"
