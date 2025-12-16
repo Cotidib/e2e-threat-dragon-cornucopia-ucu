@@ -1,4 +1,5 @@
 from pages.base_page import BasePage
+import os
 
 class addDiagramPage(BasePage):
     def __init__(self, page):
@@ -18,4 +19,8 @@ class addDiagramPage(BasePage):
         self.page.get_by_role("menuitem", name="EoP").click()
 
     def save_diagram(self):
-        self.page.get_by_role("button", name="Save").click()
+        os.makedirs("downloads", exist_ok=True)
+        with self.page.expect_download() as download_info:
+            self.page.get_by_role("button", name="Save").click()
+        download = download_info.value
+        download.save_as("downloads/test-diagram.json")

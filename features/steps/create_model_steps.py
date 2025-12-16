@@ -7,7 +7,8 @@ from pages.home_page import HomePage
 def step_impl(context):
     playwright = sync_playwright().start()
     context.browser = playwright.chromium.launch(headless=False)
-    context.page = context.browser.new_page()
+    context.page = context.browser.new_page(accept_downloads=True)
+    context.page.add_init_script("delete window.showSaveFilePicker")
     context.home_page = HomePage(context.page)
     context.home_page.go_to("http://localhost:8080/")
 
